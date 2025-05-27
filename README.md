@@ -8,4 +8,4 @@ Before starting this project, I would like to mention DataLumina for this projec
 
 # Project Description
 
-In this project, I made a text translation app using LangChain and Streamlit.
+In this project, I made a text translation app using LangChain and Streamlit. It is a simple app that uses Groq+Llama3 as its working model. 
