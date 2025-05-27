@@ -35,7 +35,7 @@ def load_model():
 model = load_model()
 
 # Prompt template
-system_template = "Translate the following from {language1} into {language2}"
+system_template = "Translate the following from {language1} into {language2} and give only the translated text without any additional commentary."
 prompt_template = ChatPromptTemplate.from_messages(
     [("system", system_template), ("user", "{text}")]
 )
@@ -47,11 +47,31 @@ st.caption("Powered by Groq + LLaMA3-8B")
 # Language selector
 language1 = st.sidebar.selectbox(
     "Select text language",
-    ["Spanish", "French", "German", "Hindi", "Japanese", "Chinese", "Arabic", "Korean"],
+    [
+        "English",
+        "Spanish",
+        "French",
+        "German",
+        "Hindi",
+        "Japanese",
+        "Chinese",
+        "Arabic",
+        "Korean",
+    ],
 )
 language2 = st.sidebar.selectbox(
     "Select target language",
-    ["Spanish", "French", "German", "Hindi", "Japanese", "Chinese", "Arabic", "Korean"],
+    [
+        "English",
+        "Spanish",
+        "French",
+        "German",
+        "Hindi",
+        "Japanese",
+        "Chinese",
+        "Arabic",
+        "Korean",
+    ],
 )
 
 # Initialize chat history
@@ -70,7 +90,9 @@ if user_input := st.chat_input("Type text to translate..."):
         st.markdown(user_input)
 
     # Build and invoke model prompt
-    prompt = prompt_template.invoke({"language1": language1, "language2": language2, "text": user_input})
+    prompt = prompt_template.invoke(
+        {"language1": language1, "language2": language2, "text": user_input}
+    )
     response = model.invoke(prompt)
 
     # Append response to chat history
