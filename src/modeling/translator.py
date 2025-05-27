@@ -27,7 +27,7 @@ if not os.environ.get("GROQ_API_KEY"):
 
 model = init_chat_model("llama3-8b-8192", model_provider="groq")
 
-system_template = "Translate the following from English into {language}"
+system_template = "Translate the following from {language1} into {language2}"
 
 prompt_template = ChatPromptTemplate.from_messages(
     [("system", system_template), ("user", "{text}")]
@@ -35,9 +35,10 @@ prompt_template = ChatPromptTemplate.from_messages(
 # prompt_template = ChatPromptTemplate.from_messages(
 #     [SystemMessage(content = system_template), HumanMessage("{text}")]
 # )
-language = input("The text will be translated to: ")
+language1 = input("The text is in: ")
+language2 = input("The text will be translated to: ")
 text = input("Enter the text to translate: ")
-prompt = prompt_template.invoke({"language": language, "text": text})
+prompt = prompt_template.invoke({"language1": language1, "language2": language2, "text": text})
 response = model.invoke(prompt)
 print(response.content)
 # print(prompt)
